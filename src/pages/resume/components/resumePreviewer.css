@@ -1,0 +1,27 @@
+
+ .resume-previewer-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+ }
+ .navigation-buttons-container{
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: aliceblue;
+ }
+ .page-number{
+    color:rgb(64, 133, 175);
+    font-weight: bold;
+ }
+ .navi-Icon :hover{
+    color:rgb(90, 10, 151);
+ }
+ .resume-generator-container{
+   display:flex;
+   flex-direction: column;
+   background-color: antiquewhite;
+ }

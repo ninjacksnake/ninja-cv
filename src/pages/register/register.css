@@ -1,0 +1,101 @@
+.register-form {
+    width: 400px;
+  }
+  .register-form-forgot {
+    float: right;
+  }
+  .ant-col-rtl .register-form-forgot {
+    float: left;
+  }
+  .register-form-button {
+    width: 100%;
+  }
+  
+  .register-form-container {
+    width: 400px;
+    padding: 50px;
+    border: 1px solid black;
+    border-radius: 25px;
+  }
+  
+  .register-container {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+  
+  }
+  .register-article h3 {
+    font-family:  sans-serif;
+  }
+  .register-social-icon{
+      display: flex;;
+      justify-content: center;
+  }
+  
+  @media(max-width: 450px){
+    .register-form{
+      
+      width:18.5rem;
+     
+    }
+      .form-container{
+        padding-top:5rem;
+      }
+      .form-container h2 {
+    
+      }
+      .register-container{
+        
+       width: auto;
+       justify-content: center;
+     
+      
+     }
+    }
+    
+    @media(max-width: 399px){
+      .register-form{
+        width:16rem;
+       height: 26rem;
+       padding: 1px;
+      }
+        .form-container{
+          
+          background-color: blue;
+        }
+        .form-container h2 {
+         color: red
+        }
+        .register-container{
+          align-content: center;
+          justify-content: center;
+       }
+    
+       .register-form-forgot{
+    
+        float: none;
+       }
+      }
+    
+    @media(max-width: 300px){
+      .register-form{
+        width:10rem;
+       height: 26rem;
+       padding: 1px;
+      }
+        .form-container{
+          padding:10rem;
+          
+        }
+        .form-container h2 {
+         color: red
+        }
+        .register-container{
+          justify-content: center;
+       }
+    
+       .register-form-forgot{
+    
+        float: none;
+       }
+      }

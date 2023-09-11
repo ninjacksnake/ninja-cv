@@ -1,0 +1,57 @@
+.jobs-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+  .jobs-form {
+    width: 50rem;
+    border: 1px solid rgba(56, 56, 51, 0.099);
+    border-radius: 10px;
+    padding: 15px;
+  }
+  .jobs-form h1 {
+    margin-left: 5rem;
+    font-size: 45px;
+  }
+  .photo-container {
+  }
+  
+  @media (max-width: 550px) {
+    .jobs-form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .jobs-form {
+      width: 17rem;
+      border: 1px solid rgba(56, 56, 51, 0.099);
+      border-radius: 10px;
+      padding: 15px;
+    }
+  
+    .jobs-form h1 {
+      margin-left: 1rem;
+      font-size: 25px;
+    }
+  }
+  
+  @media (max-width: 350px) {
+    .jobs-form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .jobs-form {
+      display: none;
+      width: 17rem;
+      border: 1px solid rgba(56, 56, 51, 0.099);
+      border-radius: 10px;
+      padding: 15px;
+    }
+  
+    .jobs-form h1 {
+      margin-left: 1rem;
+      font-size: 25px;
+    }
+  }

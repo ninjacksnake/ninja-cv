@@ -1,0 +1,114 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  padding: 5vw;
+}
+
+.login-form {
+  width: 25rem;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.login-form-container {
+
+  border: 1px solid black;
+  border-radius: 25px;
+  padding:50px;
+}
+
+
+.login-article {
+  display: flex;
+  justify-content: center;
+}
+
+.login-article h3 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: x-large;
+}
+
+.login-social-icon {
+  display: flex;
+  justify-content: center;
+}
+
+
+@media(max-width: 450px){
+.login-form{
+  
+  width:18.5rem;
+ 
+}
+  .form-container{
+    padding-top:5rem;
+    background-color: blue;
+  }
+  .form-container h2 {
+   color: red
+  }
+  .login-container{
+    
+   width: auto;
+   justify-content: center;
+ 
+  
+ }
+}
+
+@media(max-width: 399px){
+  .login-form{
+    width:16rem;
+   height: 26rem;
+   padding: 1px;
+  }
+    .form-container{
+      
+      background-color: blue;
+    }
+    .form-container h2 {
+     color: red
+    }
+    .login-container{
+      align-content: center;
+      justify-content: center;
+   }
+
+   .login-form-forgot{
+
+    float: none;
+   }
+  }
+
+@media(max-width: 300px){
+  .login-form{
+    width:10rem;
+   height: 26rem;
+   padding: 1px;
+  }
+    .form-container{
+      padding:10rem;
+      background-color: blue;
+    }
+    .form-container h2 {
+     color: red
+    }
+    .login-container{
+      justify-content: center;
+   }
+
+   .login-form-forgot{
+
+    float: none;
+   }
+  }
