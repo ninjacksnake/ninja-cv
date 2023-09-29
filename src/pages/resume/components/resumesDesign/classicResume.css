@@ -1,0 +1,72 @@
+.cv-card {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  /* CV Header Styles */
+  .cv-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* CV Title Styles */
+  .cv-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* CV Subtitle Styles */
+  .cv-subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  /* CV Section Styles */
+  .cv-section {
+    margin-bottom: 20px;
+  }
+  
+  /* CV Job Styles (for Professional Experience) */
+  .cv-job {
+    margin-bottom: 20px;
+  }
+  
+  /* Custom List Styles */
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+.resume-left-bar {
+    height: fit-content;
+    position: absolute;
+    top: 8rem;
+    left: 14rem;
+  }
+  
+  @media screen and (min-width: 600px) {
+    .resume-left-bar {
+      height: fit-content;
+    }
+  }
+  
+  @media screen and (max-width: 1156px) {
+    .resume-left-bar {
+      height: fit-content;
+      position: relative;
+      left: -1rem;
+      top:2rem;
+      transition: ease 
+    }
+    .generate-button {
+      width: 100px;  
+    }
+  }
+  

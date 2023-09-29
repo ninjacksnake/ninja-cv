@@ -1,0 +1,130 @@
+.resume-header {
+  display: flex;
+  background-color: gray;
+  padding: 15px;
+}
+.resume {
+  background-color: white;
+  width: 600px;
+  min-height: 840px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(53, 53, 96);
+  border-radius: 3px;
+}
+
+.body-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.section-title {
+  margin-bottom: 22px;
+}
+
+.about-me-box {
+  font-size: 12.5px;
+  padding: 5px;
+  margin-left: 0.4rem;
+}
+.column-right {
+  font-size: 10px;
+  margin-left: 0.4rem;
+}
+.basic-info-list {
+  position: relative;
+  left: -2rem;
+}
+
+.column-left article {
+  width: 17rem;
+  /* text-align: start; */
+}
+
+.section-title {
+  margin-left: 10px;
+}
+
+.timeline-container {
+  margin-left: 10px;
+  width: 19rem;
+  /* background-color: #fff; */
+}
+
+.section-title-hr-left {
+  color: gray;
+  margin-left: 10px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  width: 150px;
+  box-shadow: 2;
+}
+
+.experience-section-box {
+  margin-top: -40px;
+}
+
+.section-title-hr-right {
+  color: gray;
+  margin-left: 0px;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  width: 150px;
+  box-shadow: 2;
+}
+
+.education-section-box {
+  width: 20rem;
+}
+
+.project-section-box {
+  margin-top: -5rem;
+
+  width: 30rem;
+}
+
+.resume-left-bar {
+  height: fit-content;
+  position: absolute;
+  top: 8rem;
+  left: 14rem;
+}
+
+@media screen and (min-width: 600px) {
+  .resume-left-bar {
+    height: fit-content;
+  }
+}
+
+@media screen and (max-width: 1156px) {
+  .resume-left-bar {
+    height: fit-content;
+    position: relative;
+    left: -1rem;
+    top:2rem;
+    transition: ease 
+  }
+  .generate-button {
+    width: 100px;  
+  }
+}
+
+
+.spinner-container{
+ display: flex;
+ height: 75vh;
+
+ align-items: center;
+}

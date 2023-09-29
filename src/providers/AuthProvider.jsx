@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
     //  console.error(error);
       if (location.pathname !== "/register" && location.pathname !== "/login") {
-        console.log("not register");
+    //    console.log("not register");
         if (error.name === "InvalidTokenError") {
           message.error("INVALID SESION!");
           setTimeout(() => {

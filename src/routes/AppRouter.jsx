@@ -8,6 +8,7 @@ import AppLayout from "../pages/AppLayout";
 import Home from "../pages/home/Home";
 import Settings from "../pages/settings/Settings";
 import Resume from "../pages/resume/Resume";
+import Basic from "../pages/resume/components/resumesDesign/BasicResume.jsx";
 
 const AppRouter = () => {
   // const navigate = useNavigate();
@@ -20,7 +21,7 @@ const AppRouter = () => {
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="settings" element={<Settings />} />
+        <Route path="settings" element={<Basic />} />
         <Route path="resume" element={<Resume />} />
       </Route>
     </Routes>
