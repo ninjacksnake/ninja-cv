@@ -16,7 +16,9 @@ const SkillsService = {
 
       return result.data;
     } catch (error) {
-      message.error(error.message);
+     if (error.message.includes("404")) {
+        message.error("No skills found");
+     }
     }
   },
   create: async function ({ token, loggedUser, skill }) {

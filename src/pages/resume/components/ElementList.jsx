@@ -22,7 +22,7 @@ const ElementList = ({ elements }) => {
                   rel="noopener noreferrer"
                   className="justified-text"
                 >
-                  Visit
+                   {element.url}
                 </a>
               ) : (
                 ""

@@ -6,7 +6,7 @@ const apiUrl = Config.ApiUrl;
 
 const ProfileService = {
   find: async function ({ token, loggedUser }) {
-console.log('profi',loggedUser);
+    console.log("profi", loggedUser);
     try {
       const result = await axios.get(
         `${apiUrl}/profile/${loggedUser.userId}/`,
@@ -16,13 +16,29 @@ console.log('profi',loggedUser);
           },
         }
       );
-    //  console.log(result.data);
+      //  console.log(result.data);
       return result.data;
     } catch (error) {
       console.error(error);
     }
   },
-
+  findSkills: async function ({ token, loggedUser }) {
+    console.log("profi", loggedUser);
+    try {
+      const result = await axios.get(
+        `${apiUrl}/profile/skills/${loggedUser.userId}/`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      //  console.log(result.data);
+      return result.data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
   create: async (createInfo) => {
     const profileInfo = await axios.post(`${apiUrl}/profile/}`, createInfo);
@@ -32,13 +48,18 @@ console.log('profi',loggedUser);
   update: async (userId, token, updateInfo) => {
     try {
       const profileInfo = await axios.put(
-        `${apiUrl}/profile/${userId}/`, updateInfo, { headers:{ 
-          Authorization: token,
-        }}) 
-  
+        `${apiUrl}/profile/${userId}/`,
+        updateInfo,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
       return profileInfo;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 

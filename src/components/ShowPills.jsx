@@ -8,9 +8,9 @@ const ShowPills = ({ elements, deleteSkill, editable = false }) => {
         editable ? (
         <div key={"pill" + index} className="pill-container">
           {element}
-          <div className="close-button" onClick={() => deleteSkill(index)}>
+          {/* <div className="close-button" onClick={() => deleteSkill(index)}>
             x
-          </div>
+          </div> */}
         </div>
         ):<Badge  count={element} key={"pill" + index} className="pill-badge"   style={ {backgroundColor: "#b6babe", color: "black",  fontSize: "12px"
       	 }}

@@ -21,7 +21,7 @@ const AppRouter = () => {
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="settings" element={<Basic />} />
+        <Route path="settings" element={<Settings />} />
         <Route path="resume" element={<Resume />} />
       </Route>
     </Routes>

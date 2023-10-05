@@ -42,7 +42,7 @@ const navigate = useNavigate();
             {
               icon: SettingOutlined,
               title: "Settings",
-              url: "/settings",
+              url: "/settings ",
             },
           ].map((item, index) => ({
             key: String(index + 1),

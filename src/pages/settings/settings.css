@@ -1,0 +1,10 @@
+.settings-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.inLine{
+    display: flex;
+    gap: 1rem;
+ 
+}

@@ -2,13 +2,16 @@ import axios from "axios";
 import Config from "../Config";
 import { message } from "antd";
 
-
 const apiUrl = Config.ApiUrl;
 //console.log("🚀 ~ file: ProfileService.jsx:7 ~ apiUrl:", apiUrl)
 
 const ProjectService = {
-  find: async function ( {token, loggedUser} ) {
-    console.log("🚀 ~ file: Project.Service.jsx:11 ~ token, loggedUser :", token, loggedUser )
+  find: async function ({ token, loggedUser }) {
+    console.log(
+      "🚀 ~ file: Project.Service.jsx:11 ~ token, loggedUser :",
+      token,
+      loggedUser
+    );
     try {
       const result = await axios.get(
         `${apiUrl}/project/${loggedUser.userId}/`,
@@ -20,8 +23,10 @@ const ProjectService = {
       );
       return result.data;
     } catch (error) {
-    console.log(error)
-      if (error.response.data.message.includes("Project not found")) {
+      console.log(error);
+      if (error.response.data.message.includes("Invalid token")) {
+        return message.error("Invalid Token");
+      }else if (error.response.data.message.includes("Project not found")) {
         return message.error("No Project Found");
       }
       //  console.error(error);

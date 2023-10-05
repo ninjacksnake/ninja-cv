@@ -1,26 +1,46 @@
 import { useEffect, useState } from "react";
 import "./skillsForm.css";
-import { Button, Form, Select } from "antd";
+import { Button, Empty, Form, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import SkillsViewer from "./SkillsViewer.jsx";
+import SkillsService from "./../../../services/SkillsService";
+import ProfileService from "./../../../services/ProfileService";
 
 const SkillsForm = ({ loggedUser, token, checkTokenExpiration }) => {
   const [form] = useForm();
-  const [skills, setSkills] = useState(["HTML", "JavaScript", "React"]);
+  const [skills, setSkills] = useState([]);
+  const [profileSkills, setProfileSkills] = useState([]);
 
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
   };
-
-  const deleteSkill = (skillIndex) => {
-    console.log(skillIndex);
-    setSkills(skills.filter((skill, index) => index !== skillIndex));
+  const changeSkills = (skill) => {
+    //  console.log(skill);
+    if (!skills.includes(skill)) {
+      setSkills((x) => skill);
+    }
   };
 
   useEffect(() => {
     checkTokenExpiration();
     //get the skills of the logged user
+    ProfileService.find({ token: token, loggedUser: loggedUser })
+      .then((foundProfile) => {})
+      .catch((error) => {
+        console.log(error);
+      });
+    //get all the skills available
+    SkillsService.find({ token: token, loggedUser: loggedUser })
+      .then((foundSkills) => {
+        if (foundSkills) {
+          console.log(skills);
+          setSkills((x) => foundSkills);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const submitForm = (values) => {
@@ -29,10 +49,12 @@ const SkillsForm = ({ loggedUser, token, checkTokenExpiration }) => {
 
   return (
     <>
-      <SkillsViewer skills={skills} deleteSkill={deleteSkill} />
+      {skills ? <SkillsViewer skills={skills} /> : <Empty />}
       <br />
+
       <Form
         {...layout}
+        initialValues={{ skills }}
         style={{ maxWidth: 600 }}
         form={form}
         onFinish={submitForm}
@@ -43,7 +65,7 @@ const SkillsForm = ({ loggedUser, token, checkTokenExpiration }) => {
             allowClear
             style={{ width: "100%" }}
             placeholder="Select skills"
-            onChange={(value) => console.log(value)}
+            onChange={(skills) => changeSkills(skills)}
             options={[
               { label: "HTML", value: "HTML" },
               { label: "CSS", value: "CSS" },
@@ -57,7 +79,7 @@ const SkillsForm = ({ loggedUser, token, checkTokenExpiration }) => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            Save
           </Button>
         </Form.Item>
       </Form>
