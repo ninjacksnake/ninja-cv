@@ -13,7 +13,6 @@ const SkillsService = {
           },
         }
       );
-
       return result.data;
     } catch (error) {
       if (error.message.includes("404")) {
@@ -21,6 +20,7 @@ const SkillsService = {
       }
     }
   },
+
   create: async function ({ token, loggedUser, skill }) {
     try {
       const result = await axios.post(`${Config.ApiUrl}/skills`, skill, {
@@ -34,6 +34,7 @@ const SkillsService = {
       message.error(error.message);
     }
   },
+
   update: async function ({ token, loggedUser, skill }) {
     try {
       const result = await axios.put(
@@ -45,7 +46,6 @@ const SkillsService = {
           },
         }
       );
-
       return result.data;
     } catch (error) {
       message.error(error.message);

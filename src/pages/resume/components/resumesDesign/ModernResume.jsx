@@ -8,14 +8,12 @@ import { FileSearchOutlined, RedoOutlined } from "@ant-design/icons";
 import Spinner from "../../../../components/Spinner.jsx";
 
 const Modern = ({ resumeInfo }) => {
-  console.log(resumeInfo)
   return (
     <>
       {!resumeInfo ? (
         <div className="spinner-container">
           <Spinner />
         </div>
-       
       ) : (
         <>
           <div className="resume-left-bar">
@@ -99,7 +97,9 @@ const Modern = ({ resumeInfo }) => {
                     <h2>Skills</h2>
                     <hr className="section-title-hr-right" />
                     <ShowPills
-                      elements={resumeInfo.profile.skills.map((skill)=>{return skill.name})}
+                      elements={resumeInfo.profile.skills.map((skill) => {
+                        return skill.name;
+                      })}
                     />
                   </div>
                 </div>
@@ -110,25 +110,27 @@ const Modern = ({ resumeInfo }) => {
                     <h3 className="section-title">Experience</h3>
                     <hr className="section-title-hr-left" />
                     <div className="timeline-container">
-                      { <Timeline
-                        items={resumeInfo.jobs.map((entity) => {
-                          return {
-                            children: (
-                              <TimeLineSet
-                                key={entity.id}
-                                info={{
-                                  title: entity.company,
-                                  institution: entity.institution,
-                                  startDate: entity.startDate,
-                                  endDate: entity.endDate,
-                                  description: entity.description,
-                                  status: entity.status,
-                                }}
-                              />
-                            ),
-                          };
-                        })}
-                      />}
+                      {
+                        <Timeline
+                          items={resumeInfo.jobs.map((entity) => {
+                            return {
+                              children: (
+                                <TimeLineSet
+                                  key={entity.id}
+                                  info={{
+                                    title: entity.company,
+                                    institution: entity.institution,
+                                    startDate: entity.startDate,
+                                    endDate: entity.endDate,
+                                    description: entity.description,
+                                    status: entity.status,
+                                  }}
+                                />
+                              ),
+                            };
+                          })}
+                        />
+                      }
                     </div>
                   </div>
                 </div>
@@ -138,7 +140,7 @@ const Modern = ({ resumeInfo }) => {
                     <h2>Projects</h2>
                     <hr className="section-title-hr-right" />
                     <ElementList
-                      elements={ resumeInfo.projects.map((entity) => {
+                      elements={resumeInfo.projects.map((entity) => {
                         return {
                           name: entity.name,
                           description: entity.description,
@@ -146,7 +148,6 @@ const Modern = ({ resumeInfo }) => {
                           endDate: entity.endDate,
                           url: entity.url,
                         };
-                      
                       })}
                     />
                   </div>

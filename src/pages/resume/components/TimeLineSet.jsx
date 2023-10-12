@@ -1,7 +1,7 @@
 import React from "react";
 import './timeLineSet.css'
 const TimeLineSet = ( {info} ) => {
-  console.log('from timelineset' , info)
+  // console.log('from timelineset' , info)
   return (
     <>
       <div className="timeLineSetContainer">

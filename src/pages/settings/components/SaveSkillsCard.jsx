@@ -8,10 +8,10 @@ const SaveSkillsCard = ({ token, loggedUser }) => {
 
   //save a new skill
   const submit = (formValues) => {
-    console.log(formValues);
+    // console.log(formValues);
     SkillsService.create({token:token, loggedUser:loggedUser,  skill:formValues})
       .then((savedSkill) => {
-        console.log(savedSkill)
+        // console.log(savedSkill)
         message.success("New skill saved successfully", savedSkill);
       })
       .catch((error) => {

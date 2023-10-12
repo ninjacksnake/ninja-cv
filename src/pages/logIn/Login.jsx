@@ -10,8 +10,6 @@ import { Button, Checkbox, Form, Image, Input } from "antd";
 import "./login.css";
 import useAuth from "../../hooks/useAuth";
 
-
-
 const Login = () => {
   const authContext = useAuth() 
   const {onLogin} = authContext;

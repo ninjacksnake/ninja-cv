@@ -12,7 +12,7 @@ const ProjectsForm = ({ loggedUser, token, checkTokenExpiration }) => {
   useEffect(() => {
     ProjectService.find({ token: token, loggedUser: loggedUser })
       .then((projects) => {
-        console.log("projects:", projects);
+        // console.log("projects:", projects);
         if (projects.length > 0) {
           setProjects(projects);
         }
@@ -36,7 +36,7 @@ const ProjectsForm = ({ loggedUser, token, checkTokenExpiration }) => {
   };
 
   const handleDelete = (id, index) => {
-    console.log("🚀 ~ file: ProjectsForm.jsx:39 ~ handleDelete ~ id:", id)
+    // console.log("🚀 ~ file: ProjectsForm.jsx:39 ~ handleDelete ~ id:", id)
     // Remove the Project entry at the specified index from the list of Projects
     ProjectService.remove(id, loggedUser, token)
       .then((response) => {

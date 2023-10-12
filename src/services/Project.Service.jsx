@@ -7,11 +7,11 @@ const apiUrl = Config.ApiUrl;
 
 const ProjectService = {
   find: async function ({ token, loggedUser }) {
-    console.log(
-      "🚀 ~ file: Project.Service.jsx:11 ~ token, loggedUser :",
-      token,
-      loggedUser
-    );
+    // console.log(
+    //   "🚀 ~ file: Project.Service.jsx:11 ~ token, loggedUser :",
+    //   token,
+    //   loggedUser
+    // );
     try {
       const result = await axios.get(
         `${apiUrl}/project/${loggedUser.userId}/`,

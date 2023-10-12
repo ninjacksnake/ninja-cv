@@ -24,7 +24,7 @@ const EducationService = {
 
   
   create: async (createInfo, loggedUser, token) => {
-    console.log("🚀 ~ file: EducationService.jsx:27 ~ create: ~ createInfo:", createInfo)
+    // console.log("🚀 ~ file: EducationService.jsx:27 ~ create: ~ createInfo:", createInfo)
     
     try {
       const profileInfo = await axios.post(

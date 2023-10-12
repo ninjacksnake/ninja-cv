@@ -37,7 +37,7 @@ const SkillsForm = ({ loggedUser, token, checkTokenExpiration }) => {
         const fSkills = foundProfile.profile.skills.map((skill) => {
           return skill.name;
         });
-        console.log(fSkills);
+        // console.log(fSkills);
         setProfileSkills((x) => fSkills);
         setSelectedSkills((x)=> fSkills)
       })

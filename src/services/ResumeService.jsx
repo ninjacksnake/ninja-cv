@@ -10,7 +10,7 @@ const ResumeService ={
     getProfileInfo: ({token, loggedUser}) => {
         if (token && loggedUser) {
             try {
-                console.log(token, loggedUser)
+                // console.log(token, loggedUser)
                 const resumeInformation = Promise.all([ 
                     ProfileService.find({token, loggedUser}),
                     EducationService.find({token, loggedUser}),
@@ -18,7 +18,7 @@ const ResumeService ={
                     ProjectService.find({token, loggedUser})
                 ]);
                 return resumeInformation;
-                console.log(resumeInformation)
+                // console.log(resumeInformation)
             } catch (error) {
                 console.log(error)
             }

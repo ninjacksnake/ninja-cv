@@ -16,7 +16,7 @@ const JobsForm = ({ loggedUser, token, checkTokenExpiration }) => {
         if (jobs.length > 0) {
           return setJobState([...jobs]);
         }
-        console.log(jobs.message);
+        // console.log(jobs.message);
       })
       .catch((error) => {
         // console.log(error)
@@ -47,7 +47,7 @@ const JobsForm = ({ loggedUser, token, checkTokenExpiration }) => {
     //Remove the job entry at the specified index from the list of jobs
     JobService.remove(id, loggedUser, token)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         const updatedJobs = jobState.filter((_, idx) => idx !== index);
         setJobState(updatedJobs);
         message.success("Job deleted successfully");

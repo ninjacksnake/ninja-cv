@@ -6,7 +6,7 @@ const apiUrl = Config.ApiUrl;
 
 const ProfileService = {
   find: async function ({ token, loggedUser }) {
-    console.log("profi", loggedUser);
+   // console.log("profi", loggedUser);
     try {
       const result = await axios.get(
         `${apiUrl}/profile/${loggedUser.userId}/`,
@@ -23,7 +23,7 @@ const ProfileService = {
     }
   },
   findSkills: async function ({ token, loggedUser }) {
-    console.log("profi", loggedUser);
+    // console.log("profi", loggedUser);
     try {
       const result = await axios.get(
         `${apiUrl}/profile/skills/${loggedUser.userId}/`,

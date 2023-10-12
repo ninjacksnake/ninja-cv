@@ -59,8 +59,7 @@ const EducationForm = ({ loggedUser, token, checkTokenExpiration }) => {
     // console.log(educationInfo);
     EducationService.create(educationInfo, loggedUser, token)
       .then((result) => {
-        console.log("saved education is :");
-        console.log(result);
+        // console.log("saved education is :");
         setEducations([...educations, result.data]);
         message.success("Education added successfully");
         form.resetFields();
