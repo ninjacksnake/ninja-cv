@@ -6,7 +6,7 @@ const SkillsService = {
   find: async function ({ token, loggedUser }) {
     try {
       const result = await axios.get(
-        `${Config.ApiUrl}/skills/${loggedUser.userId}/`,
+        `${Config.ApiUrl}/skills`,
         {
           headers: {
             Authorization: token,
@@ -16,22 +16,18 @@ const SkillsService = {
 
       return result.data;
     } catch (error) {
-     if (error.message.includes("404")) {
+      if (error.message.includes("404")) {
         message.error("No skills found");
-     }
+      }
     }
   },
   create: async function ({ token, loggedUser, skill }) {
     try {
-      const result = await axios.post(
-        `${Config.ApiUrl}/skills/${loggedUser.userId}/`,
-        skill,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const result = await axios.post(`${Config.ApiUrl}/skills`, skill, {
+        headers: {
+          Authorization: token,
+        },
+      });
 
       return result.data;
     } catch (error) {

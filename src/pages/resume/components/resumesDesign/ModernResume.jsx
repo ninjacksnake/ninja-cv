@@ -8,6 +8,7 @@ import { FileSearchOutlined, RedoOutlined } from "@ant-design/icons";
 import Spinner from "../../../../components/Spinner.jsx";
 
 const Modern = ({ resumeInfo }) => {
+  console.log(resumeInfo)
   return (
     <>
       {!resumeInfo ? (
@@ -98,13 +99,7 @@ const Modern = ({ resumeInfo }) => {
                     <h2>Skills</h2>
                     <hr className="section-title-hr-right" />
                     <ShowPills
-                      elements={[
-                        "JavaScript",
-                        "React",
-                        "Angular",
-                        "NodeJs",
-                        "Html",
-                      ]}
+                      elements={resumeInfo.profile.skills.map((skill)=>{return skill.name})}
                     />
                   </div>
                 </div>

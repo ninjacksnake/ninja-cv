@@ -10,33 +10,45 @@ const SkillsForm = ({ loggedUser, token, checkTokenExpiration }) => {
   const [form] = useForm();
   const [skills, setSkills] = useState([]);
   const [profileSkills, setProfileSkills] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
 
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
   };
   const changeSkills = (skill) => {
-    //  console.log(skill);
     if (!skills.includes(skill)) {
-      setSkills((x) => skill);
+         setSelectedSkills((x) => skill);
     }
+  };
+
+  const deleteSkill = (index) => {
+    setProfileSkills(profileSkills.filter((x, i) => i !== index));
+    ProfileService.update(loggedUser.userId, token, {
+      skills: profileSkills.filter((x, i) => i !== index),
+    });
   };
 
   useEffect(() => {
     checkTokenExpiration();
     //get the skills of the logged user
     ProfileService.find({ token: token, loggedUser: loggedUser })
-      .then((foundProfile) => {})
+      .then((foundProfile) => {
+        const fSkills = foundProfile.profile.skills.map((skill) => {
+          return skill.name;
+        });
+        console.log(fSkills);
+        setProfileSkills((x) => fSkills);
+        setSelectedSkills((x)=> fSkills)
+      })
       .catch((error) => {
         console.log(error);
       });
+
     //get all the skills available
     SkillsService.find({ token: token, loggedUser: loggedUser })
       .then((foundSkills) => {
-        if (foundSkills) {
-          console.log(skills);
-          setSkills((x) => foundSkills);
-        }
+        setSkills(foundSkills);
       })
       .catch((error) => {
         console.log(error);
@@ -44,45 +56,49 @@ const SkillsForm = ({ loggedUser, token, checkTokenExpiration }) => {
   }, []);
 
   const submitForm = (values) => {
-    console.log(values);
+    const newSkills = values.skills.map((skill) => {
+      return { name: skill };
+    });
+    ProfileService.update(loggedUser.userId, token, { skills: newSkills });
   };
 
   return (
     <>
-      {skills ? <SkillsViewer skills={skills} /> : <Empty />}
+      {selectedSkills.length > 0 ? (
+        <SkillsViewer skills={selectedSkills} deleteSkill={deleteSkill} />
+      ) : (
+        <Empty />
+      )}
       <br />
-
-      <Form
-        {...layout}
-        initialValues={{ skills }}
-        style={{ maxWidth: 600 }}
-        form={form}
-        onFinish={submitForm}
-      >
-        <Form.Item name="skills">
-          <Select
-            mode="multiple"
-            allowClear
-            style={{ width: "100%" }}
-            placeholder="Select skills"
-            onChange={(skills) => changeSkills(skills)}
-            options={[
-              { label: "HTML", value: "HTML" },
-              { label: "CSS", value: "CSS" },
-              { label: "JavaScript", value: "JavaScript" },
-              { label: "React", value: "React" },
-              { label: "Node.js", value: "Node.js" },
-              { label: "Express", value: "Express" },
-              { label: "MongoDB", value: "mongo" },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Save
-          </Button>
-        </Form.Item>
-      </Form>
+      {selectedSkills.length > 0 ? (
+        <Form
+          {...layout}
+          initialValues={{ skills: selectedSkills }}
+          style={{ maxWidth: 600 }}
+          form={form}
+          onFinish={submitForm}
+        >
+          <Form.Item name="skills">
+            <Select
+              mode="multiple"
+              allowClear
+              style={{ width: "100%" }}
+              placeholder="Select skills"
+              onChange={(skills) => changeSkills(skills)}
+              options={skills.map((skill) => {
+                return { label: skill.name, value: skill.name };
+              })}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
+      ) : (
+        <Empty />
+      )}
     </>
   );
 };
