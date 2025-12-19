@@ -1,25 +1,21 @@
 import React from "react";
-import { FileSearchOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import { pdfFromReact } from "generate-pdf-from-react-html";
 
 const SleekResume = ({ resumeInfo }) => {
-  return (
-    <>
-      <div className="resume-left-bar">
-        <Button
-          title="Generate and preview"
-          className="generate-button"
-          onClick={() => pdfFromReact(".resume", "my-resume", "p", true, true)}
-          icon={<FileSearchOutlined />}
-        >
-          Generate
-        </Button>
-      </div>
+  if (!resumeInfo) {
+    return (
       <div className="cv-card">
-        <div>SleekResume</div>
+        <div className="loading-placeholder">
+          <p>Loading resume data...</p>
+        </div>
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="cv-card">
+      <div>SleekResume - Coming Soon</div>
+      {/* TODO: Implement sleek resume template */}
+    </div>
   );
 };
 

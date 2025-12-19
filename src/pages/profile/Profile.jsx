@@ -1,5 +1,13 @@
-import { Card } from "antd";
+import { Card, Avatar, Typography, Space, Divider } from "antd";
 import React, { useState } from "react";
+import {
+  UserOutlined,
+  BookOutlined,
+  EnvironmentOutlined,
+  ProjectOutlined,
+  StarOutlined,
+  IdcardOutlined
+} from "@ant-design/icons";
 import EducationForm from "./components/EducationForm";
 import JobsForm from "./components/JobsForm";
 import ProfileForm from "./components/ProfileForm";
@@ -14,11 +22,51 @@ const Profile = () => {
   const {loggedUser, token, checkTokenExpiration } = authContext;
  
   const tabList = [
-    { key: "Tab1", tab: "General Info" },
-    { key: "Tab2", tab: "Education" },
-    { key: "Tab3", tab: "Jobs" },
-    { key: "Tab4", tab: "Projects" },
-    { key: "Tab5", tab: "Skills" },
+    {
+      key: "Tab1",
+      tab: (
+        <span>
+          <IdcardOutlined />
+          General Info
+        </span>
+      )
+    },
+    {
+      key: "Tab2",
+      tab: (
+        <span>
+          <BookOutlined />
+          Education
+        </span>
+      )
+    },
+    {
+      key: "Tab3",
+      tab: (
+        <span>
+          <EnvironmentOutlined />
+          Jobs
+        </span>
+      )
+    },
+    {
+      key: "Tab4",
+      tab: (
+        <span>
+          <ProjectOutlined />
+          Projects
+        </span>
+      )
+    },
+    {
+      key: "Tab5",
+      tab: (
+        <span>
+          <StarOutlined />
+          Skills
+        </span>
+      )
+    },
   ];
 
   const contentList = {
@@ -32,17 +80,46 @@ const Profile = () => {
   const onTabChange = (key) => {
     setSelectedTab(key);
   };
+  const { Title, Text } = Typography;
+
   return (
-    <div className="profile-card-container">
-      <Card
-        className="profile-card"
-        title={`${loggedUser?.username}'s profile`}
-        tabList={tabList}
-        activeTabKey={selectedTab}
-        onTabChange={onTabChange}
-      >
-        {contentList[selectedTab]}
-      </Card>
+    <div className="profile-container">
+      <div className="profile-header">
+        <Card className="profile-header-card">
+          <Space size="large" align="center">
+            <Avatar
+              size={80}
+              icon={<UserOutlined />}
+              className="profile-avatar"
+            />
+            <div className="profile-info">
+              <Title level={2} className="profile-name">
+                {loggedUser?.username}'s Profile
+              </Title>
+              <Text type="secondary" className="profile-subtitle">
+                Manage your professional information and build your resume
+              </Text>
+            </div>
+          </Space>
+        </Card>
+      </div>
+
+      <div className="profile-content">
+        <Card
+          className="profile-card"
+          tabList={tabList}
+          activeTabKey={selectedTab}
+          onTabChange={onTabChange}
+          tabProps={{
+            size: 'large',
+            type: 'line'
+          }}
+        >
+          <div className="tab-content">
+            {contentList[selectedTab]}
+          </div>
+        </Card>
+      </div>
     </div>
   );
 };

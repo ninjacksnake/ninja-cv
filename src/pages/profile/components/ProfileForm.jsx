@@ -18,10 +18,10 @@ const ProfileForm = () => {
       try {
         if (loggedUser.userId) {
           const profile = await ProfileService.find({ token, loggedUser });
-        //  console.log("🚀 ~ file: ProfileForm.jsx:22 ~ findProfile ~ profile:", profile.profile)
+          //  console.log("🚀 ~ file: ProfileForm.jsx:22 ~ findProfile ~ profile:", profile.profile)
           setProfileInfo(profile.profile);
         }
-      } catch (error)  {
+      } catch (error) {
         console.log(error);
       }
     };
@@ -52,146 +52,156 @@ const ProfileForm = () => {
     //  /   console.log(image.length);
   };
   return (
+
     <div className="profile-form-container">
-      {Object.keys(profileInfo).length > 0 ? (
-        <Form
-          className="profile-form"
-          form={form}
-          initialValues={profileInfo}
-          layout="vertical"
-          onFinish={onSubmit}
-        >
-          <Space>
+      <div className="profile-edit-section">
+        <div className="profile-header">
+          <div className="photo-wrapper">
+            <ImageUploader getImageBynaries={getImage} />
+          </div>
+          <h3>Edit Profile</h3>
+        </div>
+
+        {Object.keys(profileInfo).length > 0 ? (
+          <Form
+            className="profile-form"
+            form={form}
+            initialValues={profileInfo}
+            layout="vertical"
+            onFinish={onSubmit}
+          >
+            <div className="form-grid-2">
+              <Form.Item
+                label="First Name"
+                name="name"
+                rules={[{ required: true, message: "Please enter your first name" }]}
+              >
+                <Input placeholder="John" />
+              </Form.Item>
+              <Form.Item
+                label="Last Name"
+                name="lastName"
+                rules={[{ required: true, message: "Please enter your last name" }]}
+              >
+                <Input placeholder="Doe" />
+              </Form.Item>
+            </div>
+
+            <div className="form-grid-2">
+              <Form.Item
+                label="City"
+                name="city"
+                rules={[{ required: true, message: "Please enter your city" }]}
+              >
+                <Input placeholder="New York" />
+              </Form.Item>
+              <Form.Item
+                label="Country"
+                name="country"
+                rules={[{ required: true, message: "Please enter your country" }]}
+              >
+                <Input placeholder="USA" />
+              </Form.Item>
+            </div>
+
+            <div className="form-grid-2">
+              <Form.Item
+                label="Contact Email"
+                name="contact"
+                rules={[{ required: false }]}
+              >
+                <Input placeholder="email@example.com" />
+              </Form.Item>
+              <Form.Item
+                label="Portfolio URL"
+                name="portafolio" // Keeping backend field name
+                rules={[{ required: false }]}
+              >
+                <Input placeholder="https://myportfolio.com" />
+              </Form.Item>
+            </div>
+
             <Form.Item
-              name="photo"
-              rules={[
-                { required: true, message: "Please complete this field" },
-              ]}
+              label="Social Network URL"
+              name="socialNetwork"
+              rules={[{ required: false }]}
             >
-              <div className="photo-container">
-                <ImageUploader getImageBynaries={getImage} />
-              </div>
+              <Input placeholder="https://linkedin.com/in/johndoe" />
             </Form.Item>
-            <h1> {profileInfo.name} </h1>
-          </Space>
-          <Form.Item
-            label="Name"
-            name="name"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <Input placeholder="Write your first name" />
-          </Form.Item>
-          <Form.Item
-            label="Lastname"
-            name="lastName"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <Input placeholder="Write your last name" />
-          </Form.Item>
-          <Form.Item
-            label="City"
-            name="city"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <Input placeholder="Write your city name" />
-          </Form.Item>
-          <Form.Item
-            label="Country"
-            name="country"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <Input placeholder="Write your Country name" />
-          </Form.Item>
-          <Form.Item
-            label="Contact"
-            name="contact"
-            rules={[{ required: false, message: "Please complete this field" }]}
-          >
-            <Input placeholder="Give a contact Email" />
-          </Form.Item>
-          <Form.Item
-            label="Portafolio Link"
-            name="portafolio"
-            rules={[{ required: false, message: "Please complete this field" }]}
-          >
-            <Input placeholder="" />
-          </Form.Item>
-          <Form.Item
-            label="Social Network link"
-            name="socialNetwork"
-            rules={[{ required: false, message: "Please complete this field" }]}
-          >
-            <Input placeholder="Give a social network link" />
-          </Form.Item>
-          <Form.Item
-            label="About Me"
-            name="aboutMe"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <TextArea
-              placeholder="Controlled autosize"
-              autoSize={{ minRows: 3, maxRows: 5 }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Strong points"
-            name="strongPoints"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <TextArea
-              placeholder="Controlled autosize"
-              autoSize={{ minRows: 3, maxRows: 5 }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Weaknesses"
-            name="weakPoints"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <TextArea
-              placeholder="Controlled autosize"
-              autoSize={{ minRows: 3, maxRows: 5 }}
-            />
-          </Form.Item>
 
-          <Form.Item
-            label="LifeStyle"
-            name="lifeStyle"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <TextArea
-              placeholder="Controlled autosize"
-              autoSize={{ minRows: 3, maxRows: 5 }}
-            />
-          </Form.Item>
-
-          <Form.Item
-            label="Aspirations"
-            name="aspirations"
-            rules={[{ required: true, message: "Please complete this field" }]}
-          >
-            <TextArea
-              placeholder="Controlled autosize"
-              autoSize={{ minRows: 3, maxRows: 5 }}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              style={{
-                float: "right",
-              }}
-              size="large"
-              type="primary"
-              htmlType="submit"
+            <Form.Item
+              label="About Me (Bio)"
+              name="aboutMe"
+              rules={[{ required: true, message: "Please tell us about yourself" }]}
             >
-              Save
-            </Button>
-          </Form.Item>
-        </Form>
-      ) : (
-        <p>Loading...</p>
-      )}
-      
+              <TextArea
+                placeholder="Brief professional summary..."
+                autoSize={{ minRows: 3, maxRows: 6 }}
+              />
+            </Form.Item>
+
+            <div className="form-grid-2">
+              <Form.Item
+                label="Strong Points"
+                name="strongPoints"
+                rules={[{ required: true, message: "Required" }]}
+              >
+                <TextArea
+                  placeholder="e.g. Leadership, Problem Solving"
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Weaknesses"
+                name="weakPoints" // Keeping backend field name
+                rules={[{ required: true, message: "Required" }]}
+              >
+                <TextArea
+                  placeholder="e.g. Public Speaking"
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+              </Form.Item>
+            </div>
+
+            <div className="form-grid-2">
+              <Form.Item
+                label="Lifestyle / Hobbies"
+                name="lifeStyle"
+                rules={[{ required: true, message: "Required" }]}
+              >
+                <TextArea
+                  placeholder="e.g. Hiking, Reading"
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Aspirations"
+                name="aspirations"
+                rules={[{ required: true, message: "Required" }]}
+              >
+                <TextArea
+                  placeholder="e.g. Become a CTO"
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+              </Form.Item>
+            </div>
+
+            <Form.Item>
+              <Button
+                style={{ marginTop: '20px' }}
+                size="large"
+                type="primary"
+                htmlType="submit"
+                block
+              >
+                Save Profile
+              </Button>
+            </Form.Item>
+          </Form>
+        ) : (
+          <div style={{ padding: '40px', textAlign: 'center' }}>Loading Profile...</div>
+        )}
+      </div>
     </div>
   );
 };

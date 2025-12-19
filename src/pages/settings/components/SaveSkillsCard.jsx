@@ -1,61 +1,60 @@
 import React from "react";
-import { Card, Form, Input, Button, Space, message } from "antd";
+import { Form, Input, Button, Space, message } from "antd";
 import SkillsService from "./../../../services/SkillsService";
+import "./skillsCard.css";
 
 const { TextArea } = Input;
+
 const SaveSkillsCard = ({ token, loggedUser }) => {
   const [skillForm] = Form.useForm();
 
   //save a new skill
   const submit = (formValues) => {
     // console.log(formValues);
-    SkillsService.create({token:token, loggedUser:loggedUser,  skill:formValues})
+    SkillsService.create({ token: token, loggedUser: loggedUser, skill: formValues })
       .then((savedSkill) => {
         // console.log(savedSkill)
-        message.success("New skill saved successfully", savedSkill);
+        message.success("New skill saved successfully");
+        skillForm.resetFields();
       })
       .catch((error) => {
         message.error(error.message);
       });
   };
 
-  const InLineLayout = {
-    wrapperCol: { span: 20, offset: 0 },
-  };
   return (
-    <>
-      <div className="soft-card">
-        <Form form={skillForm} name="skills-form" onFinish={submit}>
-          <Card title="Create a new Skills">
-            <Form.Item
-              name="name"
-              label="Name"
-              rules={[{ required: true }]}
-              {...InLineLayout}
-            >
-              <div className="inLine">
-                <Input />
-                {/* <Button children={"Find"} onClick={findSkill} /> */}
-              </div>
-            </Form.Item>
+    <div className="save-skills-card-container">
+      <div className="save-skills-card">
+        <h3>Create New Skill</h3>
+        <p className="card-subtitle">Define a new global skill that can be added to profiles.</p>
 
-            <Form.Item name="description" label="Description">
-              <TextArea rows={3} />
-            </Form.Item>
-            <Form.Item>
-              <Space wrap>
-                {/* <Button danger type="primary" onClick={remove}>
-                  Delete Skill
-                </Button> */}
-                <Button type="primary" htmlType="submit" onClick={submit}>
-                  Save Skill
-                </Button>
-              </Space>
-            </Form.Item>
-          </Card>
+        <Form
+          form={skillForm}
+          name="skills-form"
+          onFinish={submit}
+          layout="vertical"
+          className="skills-form"
+        >
+          <Form.Item
+            name="name"
+            label="Skill Name"
+            rules={[{ required: true, message: "Please enter a skill name" }]}
+          >
+            <Input placeholder="e.g. React, Python, Project Management" />
+          </Form.Item>
+
+          <Form.Item name="description" label="Description (Optional)">
+            <TextArea rows={3} placeholder="Brief description of this skill..." />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit" block size="large">
+              Save Skill
+            </Button>
+          </Form.Item>
         </Form>
       </div>
-    </>
+    </div>
   );
 };
 

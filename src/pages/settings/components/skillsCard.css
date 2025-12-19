@@ -1,0 +1,45 @@
+.save-skills-card-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.save-skills-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.save-skills-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.card-subtitle {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.skills-form {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .save-skills-card-container {
+        padding: 10px;
+    }
+
+    .save-skills-card {
+        padding: 20px;
+    }
+}

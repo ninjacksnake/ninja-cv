@@ -15,86 +15,113 @@ const ResponsiveCardList = ({
   handleView,
   cardType,
 }) => {
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    return new Date(dateString).toLocaleDateString(undefined, {
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const renderCardContent = (item) => {
+    if (cardType === "education") {
+      return (
+        <div className="card-content">
+          <Meta
+            title={item.degree || item.educationType}
+            description={item.institution || item.institutionName}
+          />
+          <div className="card-details">
+            <p className="card-date">
+              {formatDate(item.startDate)} - {item.status === "In Progress" ? "Present" : formatDate(item.endDate)}
+            </p>
+            {item.status && <p className="card-status">{item.status}</p>}
+          </div>
+        </div>
+      );
+    } else if (cardType === "job") {
+      return (
+        <div className="card-content">
+          <Meta
+            title={item.title}
+            description={item.company}
+          />
+          <div className="card-details">
+            <p className="card-date">
+              {formatDate(item.startDate)} - {item.current ? "Present" : formatDate(item.endDate)}
+            </p>
+            {item.technologiesUsed && (
+              <p className="card-tech">
+                {item.technologiesUsed}
+              </p>
+            )}
+          </div>
+        </div>
+      );
+    } else if (cardType === "projects") {
+      return (
+        <div className="card-content">
+          <Meta
+            title={item.name}
+            description={
+              item.url ? (
+                <a href={item.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  {item.url}
+                </a>
+              ) : null
+            }
+          />
+          <div className="card-details">
+            <p className="card-date">
+              {formatDate(item.startDate)} - {formatDate(item.endDate)}
+            </p>
+            <p className="card-description" title={item.description}>
+              {item.description}
+            </p>
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-   
     <List
       grid={{
-        gutter: 10,
+        gutter: 16,
         xs: 1,
         sm: 1,
         md: 2,
-        lg: 3,
-        xl: 4,
-        xxl: 4,
+        lg: 2,
+        xl: 3,
+        xxl: 3,
       }}
       dataSource={data}
       renderItem={(item, index) => (
-     
         <List.Item>
           <Card
-            title={ item.company ?  item.company: ""}
+            className="custom-card"
             actions={[
               <EyeFilled
                 key="setting"
-                onClick={() => handleView(item._id)}
-                className="eyeActionIcon"
+                onClick={() => handleView(item)}
+                className="eyeActionIcon action-icon"
               />,
               <EditOutlined
                 key="edit"
-                onClick={() => handleUpdate(item._id)}
+                onClick={() => handleUpdate(item)}
+                className="editActionIcon action-icon"
                 style={{ color: "green" }}
               />,
               <DeleteFilled
                 key="delete"
                 onClick={() => handleDelete(item._id, index)}
+                className="deleteActionIcon action-icon"
                 style={{ color: "red" }}
               />,
             ]}
           >
-            {
-            
-            cardType === "education" ? (
-              <Meta
-                title={item.educationType}
-                description={item.institutionName}
-              />
-            ) : cardType === "job" ? (
-              <Meta
-                title={item.title}
-                description={item.technologiesUsed                                                                                                                                                                                                                                                                                 
-                }
-              />
-            ) : cardType === "projects" ? (
-              <Meta
-                title= <h2>{item.name}</h2>
-                description= <a href="item.url">{item.url}</a>
-              />
-            ) : (
-              <Meta
-                title={item.educationType}
-                description={item.institutionName}
-              />
-            )}
-
-            <ul>
-              <li>
-                {" "}
-                <b>Start date:</b>{" "}
-                {new Date(item.startDate).toLocaleDateString()}
-              </li>
-              <li>
-                <b>End date:</b> {new Date(item.endDate).toLocaleDateString()}
-              </li>
-              <li>
-                {cardType === "education"
-                  ? `Status ${item.status}`
-                  : cardType === "job"
-                  ? `Title : ${item.title}`
-                  : cardType === "projects"
-                  ? `Description : ${item.description}.`
-                  : ""}
-              </li>
-            </ul>
+            {renderCardContent(item)}
           </Card>
         </List.Item>
       )}

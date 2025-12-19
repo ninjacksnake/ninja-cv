@@ -26,8 +26,8 @@ const ProjectService = {
       console.log(error);
       if (error.response.data.message.includes("Invalid token")) {
         return message.error("Invalid Token");
-      }else if (error.response.data.message.includes("Project not found")) {
-        return message.error("No Project Found");
+      } else if (error.response.data.message.includes("Project not found")) {
+        // return message.error("No Project Found");
       }
       //  console.error(error);
     }

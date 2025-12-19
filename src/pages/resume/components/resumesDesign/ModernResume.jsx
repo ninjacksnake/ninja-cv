@@ -1,11 +1,11 @@
-import { pdfFromReact } from "generate-pdf-from-react-html";
-import { Timeline, Button, Tooltip } from "antd";
-import TimeLineSet from "../../components/TimeLineSet.jsx";
-import ShowPills from "../../../../components/ShowPills.jsx";
-import ElementList from "../../components/ElementList.jsx";
 import "./modernResume.css";
-import { FileSearchOutlined, RedoOutlined } from "@ant-design/icons";
 import Spinner from "../../../../components/Spinner.jsx";
+import {
+  PhoneOutlined,
+  MailOutlined,
+  GlobalOutlined,
+  EnvironmentOutlined,
+} from "@ant-design/icons";
 
 const Modern = ({ resumeInfo }) => {
   return (
@@ -15,152 +15,180 @@ const Modern = ({ resumeInfo }) => {
           <Spinner />
         </div>
       ) : (
-        <>
-          <div className="resume-left-bar">
-            <Button
-              title="Generate and preview"
-              className="generate-button"
-              onClick={() =>
-                pdfFromReact(".resume", "my-resume", "p", true, true)
-              }
-              icon={<FileSearchOutlined />}
-            >
-              Generate
-            </Button>
-          </div>
-          <div className="resume">
-            <div className="resume-header">
-              <h1>
-                {resumeInfo.profile.name} {resumeInfo.profile.lastName}
-              </h1>
-            </div>
-            <div className="resume-body">
-              <div className="body-row">
-                <div className="column-left">
-                  <div className="about-me-box">
-                    <h3>About me</h3>
-                    <article>{resumeInfo.profile.aboutMe}</article>
-                  </div>
-                </div>
-                <div className="column-right">
-                  <h3>Info</h3>
-                  <div className="basic-info-list">
-                    <ul>
-                      <li>
-                        <b>Phone:</b> {resumeInfo.profile.phone}
-                      </li>
-                      <li>
-                        <b>Email:</b> {resumeInfo.profile.email}
-                      </li>
-                      <li>
-                        <b>Address:</b> {resumeInfo.profile.city},{" "}
+        <div className="modern-resume-page">
+          <header className="modern-resume-header">
+            <h1 className="modern-resume-name">
+              {resumeInfo.profile?.name || ""} {resumeInfo.profile?.lastName || ""}
+            </h1>
+            {resumeInfo.profile?.role && (
+              <p className="modern-resume-role">{resumeInfo.profile.role}</p>
+            )}
+          </header>
+
+          <div className="modern-resume-body">
+            <aside className="modern-resume-sidebar">
+              <div className="modern-sidebar-section">
+                <h3 className="modern-sidebar-title">Contact</h3>
+                <ul className="modern-contact-list">
+                  {resumeInfo.profile?.phone && (
+                    <li>
+                      <PhoneOutlined className="icon-svg" />
+                      <span className="text">{resumeInfo.profile.phone}</span>
+                    </li>
+                  )}
+                  {(resumeInfo.profile?.email || resumeInfo.profile?.contact) && (
+                    <li>
+                      <MailOutlined className="icon-svg" />
+                      <span className="text">
+                        {resumeInfo.profile.email || resumeInfo.profile.contact}
+                      </span>
+                    </li>
+                  )}
+                  {(resumeInfo.profile?.city || resumeInfo.profile?.country) && (
+                    <li>
+                      <EnvironmentOutlined className="icon-svg" />
+                      <span className="text">
+                        {resumeInfo.profile.city}
+                        {resumeInfo.profile.city && resumeInfo.profile.country
+                          ? ", "
+                          : ""}
                         {resumeInfo.profile.country}
-                      </li>
-                      <li>
-                        <b>Portfolio:</b> {resumeInfo.profile.portafolio}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                      </span>
+                    </li>
+                  )}
+                  {resumeInfo.profile?.portafolio && (
+                    <li>
+                      <GlobalOutlined className="icon-svg" />
+                      <a href={resumeInfo.profile.portafolio} target="_blank" rel="noreferrer" className="text link">
+                        Portfolio
+                      </a>
+                    </li>
+                  )}
+                </ul>
               </div>
-              <div className="body-row">
-                <div className="education-section-box">
-                  <div className="column-left">
-                    <h3 className="section-title">Education</h3>
-                    <hr className="section-title-hr-left" />
-                    <div className="timeline-container">
-                      <Timeline
-                        items={resumeInfo.educations.map((entity) => {
-                          return {
-                            children: (
-                              <TimeLineSet
-                                key={entity.id}
-                                info={{
-                                  title: entity.educationType,
-                                  institution: entity.institution,
-                                  startDate: entity.startDate,
-                                  endDate: entity.endDate,
-                                  description: entity.description,
-                                  status: entity.status,
-                                }}
-                              />
-                            ),
-                          };
-                        })}
-                      />
-                    </div>
-                  </div>
-                </div>
 
-                <div className="skill-section-box">
-                  <div className="column-right">
-                    <h2>Skills</h2>
-                    <hr className="section-title-hr-right" />
-                    <ShowPills
-                      elements={resumeInfo.profile.skills.map((skill) => {
-                        return skill.name;
-                      })}
-                    />
+              {resumeInfo.profile?.skills?.length > 0 && (
+                <div className="modern-sidebar-section">
+                  <h3 className="modern-sidebar-title">Skills</h3>
+                  <div className="modern-skills-wrapper">
+                    {resumeInfo.profile.skills.map((skill, index) => (
+                      <span key={index} className="modern-skill-tag">
+                        {skill.name}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
-              <div className="body-row">
-                <div className="column-left">
-                  <div className="experience-section-box">
-                    <h3 className="section-title">Experience</h3>
-                    <hr className="section-title-hr-left" />
-                    <div className="timeline-container">
-                      {
-                        <Timeline
-                          items={resumeInfo.jobs.map((entity) => {
-                            return {
-                              children: (
-                                <TimeLineSet
-                                  key={entity.id}
-                                  info={{
-                                    title: entity.company,
-                                    institution: entity.institution,
-                                    startDate: entity.startDate,
-                                    endDate: entity.endDate,
-                                    description: entity.description,
-                                    status: entity.status,
-                                  }}
-                                />
-                              ),
-                            };
-                          })}
-                        />
-                      }
-                    </div>
-                  </div>
-                </div>
+              )}
+            </aside>
 
-                <div className="project-section-box">
-                  <div className="column-right">
-                    <h2>Projects</h2>
-                    <hr className="section-title-hr-right" />
-                    <ElementList
-                      elements={resumeInfo.projects.map((entity) => {
-                        return {
-                          name: entity.name,
-                          description: entity.description,
-                          startDate: entity.startDate,
-                          endDate: entity.endDate,
-                          url: entity.url,
-                        };
-                      })}
-                    />
+            <main className="modern-resume-content">
+              <section className="modern-section">
+                <h2 className="modern-section-title">About Me</h2>
+                <p className="modern-text-content">
+                  {resumeInfo.profile?.aboutMe || "No description available"}
+                </p>
+              </section>
+
+              <section className="modern-section">
+                <h2 className="modern-section-title">Experience</h2>
+                {resumeInfo.jobs?.length > 0 ? (
+                  <div className="modern-timeline">
+                    {resumeInfo.jobs.map((job) => (
+                      <div key={job.id} className="modern-timeline-item">
+                        <div className="modern-timeline-header">
+                          <h3 className="modern-item-title">{job.company}</h3>
+                          <span className="modern-date-range">
+                            {new Date(job.startDate).toLocaleDateString(undefined, {
+                              month: "short",
+                              year: "numeric",
+                            })}{" "}
+                            -{" "}
+                            {new Date(job.endDate).toLocaleDateString(undefined, {
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                        <h4 className="modern-item-subtitle">{job.institution}</h4>
+                        <p className="modern-item-description">{job.description}</p>
+                      </div>
+                    ))}
                   </div>
-                  {/* column right */}
-                </div>
-                {/* section box */}
-              </div>
-              {/* body row */}
-            </div>
-            {/* resume body */}
+                ) : (
+                  <div className="modern-no-data">No work experience available</div>
+                )}
+              </section>
+
+              <section className="modern-section">
+                <h2 className="modern-section-title">Education</h2>
+                {resumeInfo.educations?.length > 0 ? (
+                  <div className="modern-timeline">
+                    {resumeInfo.educations.map((edu) => (
+                      <div key={edu.id} className="modern-timeline-item">
+                        <div className="modern-timeline-header">
+                          <h3 className="modern-item-title">{edu.institution}</h3>
+                          <span className="modern-date-range">
+                            {new Date(edu.startDate).toLocaleDateString(undefined, {
+                              month: "short",
+                              year: "numeric",
+                            })}{" "}
+                            -{" "}
+                            {new Date(edu.endDate).toLocaleDateString(undefined, {
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                        <h4 className="modern-item-subtitle">{edu.educationType}</h4>
+                        <p className="modern-item-description">{edu.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="modern-no-data">
+                    No education information available
+                  </div>
+                )}
+              </section>
+
+              <section className="modern-section">
+                <h2 className="modern-section-title">Projects</h2>
+                {resumeInfo.projects?.length > 0 ? (
+                  <div className="modern-grid-list">
+                    {resumeInfo.projects.map((project) => (
+                      <div
+                        key={project.id || project.name}
+                        className="modern-grid-item"
+                      >
+                        <div className="modern-timeline-header">
+                          <h3 className="modern-item-title">{project.name}</h3>
+                          {project.url && (
+                            <a
+                              href={project.url}
+                              className="modern-project-link"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              View Project ↗
+                            </a>
+                          )}
+                        </div>
+                        <p className="modern-item-description">
+                          {project.description}
+                        </p>
+                        <span className="modern-date-range-sm">
+                          {new Date(project.startDate).toLocaleDateString()}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="modern-no-data">No projects available</div>
+                )}
+              </section>
+            </main>
           </div>
-          {/* resume */}
-        </>
+        </div>
       )}
     </>
   );
