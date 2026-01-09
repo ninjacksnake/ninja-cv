@@ -14,9 +14,9 @@ const AuthService = {
     }
   },
 
-  Register: async ({username, password}) =>{
+  Register: async ({ username, password }) => {
     try {
-      const newUser = await axios.post(`${Config.ApiUrl}/register`,{
+      const newUser = await axios.post(`${Config.ApiUrl}/register`, {
         username,
         password,
       });

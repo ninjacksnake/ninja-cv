@@ -6,6 +6,6 @@ const cloudinaryConfig = {
 
 module.exports = {
   //ApiUrl: "http://localhost:3001/api",
-  ApiUrl: "https://ninja-cv-api.onrender.com/",
+  ApiUrl: "https://ninja-cv-api.onrender.com/api",
   cloudinaryConfig,
 }

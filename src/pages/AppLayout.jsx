@@ -6,7 +6,7 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
-import {  Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -14,14 +14,14 @@ const App = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <Layout className="layout-container">
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
-        onBreakpoint={(broken) => {}}
-        onCollapse={(collapsed, type) => {}}
+        onBreakpoint={(broken) => { }}
+        onCollapse={(collapsed, type) => { }}
       >
         <div className="demo-logo-vertical" />
         <Menu
