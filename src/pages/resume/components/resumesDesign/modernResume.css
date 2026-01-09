@@ -25,6 +25,29 @@
   text-align: left;
 }
 
+.modern-header-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.modern-photo-container {
+  flex-shrink: 0;
+}
+
+.modern-profile-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modern-header-info {
+  flex-grow: 1;
+}
+
 .modern-resume-name {
   margin: 0;
   font-size: 1.5rem;

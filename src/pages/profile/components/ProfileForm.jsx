@@ -1,4 +1,4 @@
-import { Button, Form, Space, Input } from "antd";
+import { Button, Form, Space, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import ImageUploader from "../../../components/ImageUploader";
 import "./profileForm.css";
@@ -8,23 +8,26 @@ import ProfileService from "../../../services/ProfileService";
 
 const ProfileForm = () => {
   const [profileInfo, setProfileInfo] = useState({});
+  const [photo, setPhoto] = useState(null);
   const authContext = useAuth();
   const { loggedUser, token, checkTokenExpiration } = authContext;
   const [form] = Form.useForm();
 
-  useEffect(() => {
-    //console.log("effect excecuted");
-    const findProfile = async () => {
-      try {
-        if (loggedUser.userId) {
-          const profile = await ProfileService.find({ token, loggedUser });
-          //  console.log("🚀 ~ file: ProfileForm.jsx:22 ~ findProfile ~ profile:", profile.profile)
-          setProfileInfo(profile.profile);
+  const findProfile = async () => {
+    try {
+      if (loggedUser.userId) {
+        const profile = await ProfileService.find({ token, loggedUser });
+        setProfileInfo(profile.profile);
+        if (profile.profile?.photo) {
+          setPhoto(profile.profile.photo);
         }
-      } catch (error) {
-        console.log(error);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
     findProfile();
   }, [loggedUser]);
 
@@ -32,16 +35,21 @@ const ProfileForm = () => {
   const onSubmit = (values) => {
     checkTokenExpiration();
     const updateProfile = async () => {
+      const updateData = { ...values };
+      if (photo) {
+        updateData.photo = photo;
+      }
       const updated = await ProfileService.update(
         loggedUser.userId,
         token,
-        values
+        updateData
       );
       return updated;
     };
     updateProfile()
       .then((result) => {
-        // findProfile(loggedUser);
+        findProfile();
+        message.success("Profile updated successfully");
       })
       .catch((error) => {
         console.log(error);
@@ -49,7 +57,7 @@ const ProfileForm = () => {
   };
 
   const getImage = (image) => {
-    //  /   console.log(image.length);
+    setPhoto(image);
   };
   return (
 
@@ -57,7 +65,7 @@ const ProfileForm = () => {
       <div className="profile-edit-section">
         <div className="profile-header">
           <div className="photo-wrapper">
-            <ImageUploader getImageBynaries={getImage} />
+            <ImageUploader getImageBynaries={getImage} initialImage={profileInfo.photo} />
           </div>
           <h3>Edit Profile</h3>
         </div>

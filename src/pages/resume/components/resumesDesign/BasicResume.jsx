@@ -24,6 +24,15 @@ const BasicResume = ({ resumeInfo }) => {
     <div className="basic-resume-page">
       {/* Header */}
       <header className="basic-resume-header">
+        {profile?.photo && (
+          <div className="basic-photo-container">
+            <img
+              src={profile.photo}
+              alt={`${profile?.name} ${profile?.lastName}`}
+              className="basic-profile-photo"
+            />
+          </div>
+        )}
         <h1 className="basic-resume-name">
           {profile?.name} {profile?.lastName}
         </h1>

@@ -17,12 +17,25 @@ const Modern = ({ resumeInfo }) => {
       ) : (
         <div className="modern-resume-page">
           <header className="modern-resume-header">
-            <h1 className="modern-resume-name">
-              {resumeInfo.profile?.name || ""} {resumeInfo.profile?.lastName || ""}
-            </h1>
-            {resumeInfo.profile?.role && (
-              <p className="modern-resume-role">{resumeInfo.profile.role}</p>
-            )}
+            <div className="modern-header-container">
+              {resumeInfo.profile?.photo && (
+                <div className="modern-photo-container">
+                  <img
+                    src={resumeInfo.profile.photo}
+                    alt={`${resumeInfo.profile?.name} ${resumeInfo.profile?.lastName}`}
+                    className="modern-profile-photo"
+                  />
+                </div>
+              )}
+              <div className="modern-header-info">
+                <h1 className="modern-resume-name">
+                  {resumeInfo.profile?.name || ""} {resumeInfo.profile?.lastName || ""}
+                </h1>
+                {resumeInfo.profile?.role && (
+                  <p className="modern-resume-role">{resumeInfo.profile.role}</p>
+                )}
+              </div>
+            </div>
           </header>
 
           <div className="modern-resume-body">

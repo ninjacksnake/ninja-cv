@@ -12,20 +12,33 @@ const getBase64 = (file) => {
     reader.onerror = () => reject(reader.error);
   });
 };
-const ImageUploader = ({ getImageBynaries }) => {
+const ImageUploader = ({ getImageBynaries, initialImage }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
+
+  React.useEffect(() => {
+    if (initialImage) {
+      setFileList([
+        {
+          uid: '-1',
+          name: 'profile-photo.png',
+          status: 'done',
+          url: initialImage,
+        },
+      ]);
+    }
+  }, [initialImage]);
 
   const compressImage = async (file) => {
     if (file === "") {
       return message.error("Please select an image for your resume");
     }
     const options = {
-      maxSizeMB: 1,
-      MaxWidthOrHeight: 1920,
-      alwaysKeepResolution:true
+      maxSizeMB: 0.1,
+      maxWidthOrHeight: 512,
+      useWebWorker: true
     };
     try {
       const compressedFile = await imageCompression(file, options);
@@ -45,7 +58,7 @@ const ImageUploader = ({ getImageBynaries }) => {
     //console.log(file);
     return false;
   };
-  
+
   const handlePreview = async (file) => {
     // console.log(file.originFileObj)
     if (!file.url || !file.preview) {
@@ -56,13 +69,13 @@ const ImageUploader = ({ getImageBynaries }) => {
     setPreviewOpen(true);
     setPreviewTitle(file.name);
   };
-  
-  const handleChange = async ( file ) => {
+
+  const handleChange = async (file) => {
     try {
       setFileList(x => file.fileList);
       if (file?.fileList[0]?.originFileObj) {
-        const compressedImage = await compressImage(file?.fileList[0]?.originFileObj) 
-         const base64Image = await getBase64(compressedImage);  
+        const compressedImage = await compressImage(file?.fileList[0]?.originFileObj)
+        const base64Image = await getBase64(compressedImage);
         getImageBynaries(base64Image);
       }
     } catch (error) {
